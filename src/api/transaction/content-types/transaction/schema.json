@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transactions",
+  "info": {
+    "singularName": "transaction",
+    "pluralName": "transactions",
+    "displayName": "Transaction",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "amount": {
+      "type": "decimal",
+      "required": true,
+      "min": 1
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "transactions"
+    },
+    "currency": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::currency.currency"
+    },
+    "receipt": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "payment_method": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::payment-method.payment-method",
+      "inversedBy": "transactions"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "transactions"
+    }
+  }
+}
